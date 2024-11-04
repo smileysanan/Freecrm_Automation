@@ -1,5 +1,7 @@
 package com.java.main;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +18,10 @@ public class WebDriver_Commands {
 	public static void main(String[] args) throws Exception {
 		LaunchApp("Chrome", "https://freecrm.com/");
 		SubmitLoginCredintial("smileysanan8688@gmail.com", "sanan888@K");
+		Thread.sleep(4000);
+		NavigateThePage("Companies");
+		Thread.sleep(4000);
+		HomePAGE("Create", "Create new Company");
 	}
 
 	public static void LaunchApp(String browser, String url) throws Exception {
@@ -69,7 +75,26 @@ public class WebDriver_Commands {
 		}
 		WebElement lgnButton = driver.findElement(By.xpath("//div[text()='Login']"));
 		lgnButton.click();
-		System.out.println("Login Succes:"+lgnButton);
+		System.out.println("Login Succes:" + lgnButton);
+
+	}
+
+	public static void NavigateThePage(String HomeIcon) {
+		driver.findElement(By.xpath("//span[text()='" + HomeIcon + "']")).click();
+		driver.getTitle();
+
+	}
+
+	public static void HomePAGE(String NewCreat, String HomeICon) {
+		driver.findElement(By.xpath("//button[text()='" + NewCreat + "']")).click();
+		List<WebElement> headerEle = driver.findElements(By.xpath("//span[text()='" + HomeICon + "']"));
+		if (headerEle.size() == 0) {
+			System.out.println("applicatio is not navigate" + HomeICon + "after the page");
+			System.exit(0);
+		} else {
+			System.out.println("application is navigate" + HomeICon + "after the page");
+		}
+		driver.getTitle();
 
 	}
 
