@@ -7,7 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
+import org.jspecify.annotations.Nullable;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class GenericMethods extends CommonMethods {
@@ -26,6 +29,12 @@ public class GenericMethods extends CommonMethods {
 		HeaderIconName("Companies");
 		Thread.sleep(4000);
 		Navigatpage("Create", "Create new Company");
+		ScrollDownMethod();
+		Thread.sleep(4000);
+		SelectValueFromDropDownBOX("Priority", "Medium");
+		SelectValueFromDropDownBOX("Source", "Event");
+		SelectValueFromDropDownBOX("Status", "Active");
+		SelectValueFromDropDownBOX("Category", "Prospect");
 
 	}
 
@@ -84,11 +93,40 @@ public class GenericMethods extends CommonMethods {
 		List<WebElement> headertag = driver.findElements(By.xpath("//span[text()='" + GettingNewICon + "']"));
 		if (headertag.size() == 0) {
 
-			System.out.println("after navigate to: " + GettingNewICon + ":expected page");
+			System.out.println("after not navigate to: " + GettingNewICon + ":expected page");
 			System.exit(0);
 		} else {
-			System.out.println("its not navigate:" + GettingNewICon + ":expected page");
+			System.out.println("its  navigate to:" + GettingNewICon + ":expected page");
 		}
+	}
+
+	public static void SelectValueFromDropDownBOX(String FieldName, String FieldValue) {
+
+		String xpath = "//label[text()='" + FieldName + "']/following-sibling::div";
+
+		WebElement element = driver.findElement(By.xpath(xpath));
+
+		element.click();
+		List<WebElement> Allelements = element.findElements(By.tagName("span"));
+
+		for (WebElement lst : Allelements) {
+			boolean Value = false;
+			String itemtext = lst.getText();
+			if (itemtext.trim().toString().contains(FieldValue)) {
+				lst.click();
+				Value = true;
+				break;
+			}
+		}
+		System.out.println("click value:" + FieldName + "from" + FieldValue);
+
+	}
+
+	public static void ScrollDownMethod() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		js.executeScript("window.scrollBy(0,20000)");
+
 	}
 
 }
