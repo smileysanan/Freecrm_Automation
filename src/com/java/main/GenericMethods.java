@@ -29,7 +29,6 @@ public class GenericMethods extends CommonMethods {
 		HeaderIconName("Companies");
 		Thread.sleep(4000);
 		Navigatpage("Create", "Create new Company");
-		ScrollDownMethod();
 		Thread.sleep(4000);
 		SelectValueFromDropDownBOX("Priority", "Medium");
 		SelectValueFromDropDownBOX("Source", "Event");
@@ -122,11 +121,6 @@ public class GenericMethods extends CommonMethods {
 
 	}
 
-	public static void ScrollDownMethod() {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-
-		js.executeScript("window.scrollBy(0,20000)");
-
-	}
+	
 
 }

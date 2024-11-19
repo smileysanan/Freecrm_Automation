@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -134,11 +135,11 @@ public class CommonMethods {
 
 	}
 
-	public static boolean SubmitCredentials(String LocatorName, String LocatorValue, String Input) {
+	public static boolean SubmitCredentials(String LocatorType, String LocatorValue, String Input) {
 
 		boolean StatusOfValue = false;
 		try {
-			WebElement element = ConditionMethod(LocatorName, LocatorValue);
+			WebElement element = ConditionMethod(LocatorType, LocatorValue);
 			element.clear();
 			element.click();
 			element.sendKeys(Input);
@@ -147,12 +148,14 @@ public class CommonMethods {
 
 		} catch (Exception e) {
 
+			
+			e.printStackTrace();
 		}
 		return StatusOfValue;
 
 	}
 
-	public static boolean ClickOnLgnBtn(String LocatorType, String LocatorValue) {
+	public static boolean ClickOnElm(String LocatorType, String LocatorValue) {
 		boolean clicktheValue = false;
 
 		WebElement element = SelectLocator(LocatorType, LocatorValue);
@@ -162,6 +165,45 @@ public class CommonMethods {
 
 		return clicktheValue;
 
+	}
+
+	public static boolean MouseHover(String LocatorType, String LocatorValue) {
+		boolean clickOnValue = false;
+		try {
+
+			 WebElement element = ConditionMethod(LocatorType, LocatorValue);
+			Actions act = new Actions(driver);
+			act.moveToElement(element).build().perform();
+			System.out.println("mouse over click on webelement");
+			clickOnValue = true;
+
+		} catch (Exception e) {
+
+		}
+
+		return clickOnValue;
+
+	}
+	
+	public static boolean ExistTittle (String LocatorType,String LocatorValue) {
+		boolean GettingCurrentTittle = false;
+		 
+		  WebElement element = SelectLocator(LocatorType, LocatorValue);
+		  if (element.equals(LocatorValue)) {
+			  System.out.println("ExpectedValue ");
+		  }else {
+			  System.out.println("its not match for Expected");
+		  }
+		  GettingCurrentTittle = true;
+		  return GettingCurrentTittle;
+		  
+		
+	
+		
+	
+		
+		
+		
 	}
 
 	public static HashMap<String, String> PropertyDatagettingIntoMapData(String env) throws FileNotFoundException {

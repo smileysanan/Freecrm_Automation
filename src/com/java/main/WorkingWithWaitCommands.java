@@ -24,7 +24,7 @@ public class WorkingWithWaitCommands {
 	public static void ExecutedWithImplicityWait(String URL) {
 
 		WebDriverManager.chromedriver().setup();
-		 driver = new ChromeDriver();
+		driver = new ChromeDriver();
 		driver.get(URL);
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		driver.manage().window().maximize();
@@ -35,7 +35,6 @@ public class WorkingWithWaitCommands {
 		} else {
 			System.out.println("its not match:" + ActualTittle);
 		}
-		
 
 	}
 
@@ -61,7 +60,7 @@ public class WorkingWithWaitCommands {
 		}
 
 		WebElement lgn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text() = 'Login']")));
-		
+        lgn.click();
 		System.out.println("succesfully login applicataion");
 		driver.close();
 	}
